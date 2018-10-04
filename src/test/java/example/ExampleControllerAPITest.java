@@ -41,11 +41,11 @@ public class ExampleControllerAPITest {
 
     @Test
     public void shouldReturnFullName() throws Exception {
-        Person peter = new Person("Peter", "Pan");
+        Person peter = new Person("Peter", "Pan", "47.472614", "19.059616");
         given(personRepository.findByLastName("Pan")).willReturn(Optional.of(peter));
 
         mockMvc.perform(get("/hello/Pan"))
-                .andExpect(content().string("Hello Peter Pan!"))
+                .andExpect(content().string("Hello Peter Pan! Now I see you at 19.059616, 47.472614."))
                 .andExpect(status().is2xxSuccessful());
     }
 

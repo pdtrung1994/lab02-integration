@@ -40,13 +40,13 @@ public class HelloE2ERestTest {
 
     @Test
     public void shouldReturnGreeting() throws Exception {
-        Person peter = new Person("Peter", "Pan");
+        Person peter = new Person("Peter", "Pan","47.472614","19.059616");
         personRepository.save(peter);
 
         when()
                 .get(String.format("http://localhost:%s/hello/Pan", port))
                 .then()
                 .statusCode(is(200))
-                .body(containsString("Hello Peter Pan!"));
+                .body(containsString("Hello Peter Pan! Now I see you at 19.059616, 47.472614."));
     }
 }

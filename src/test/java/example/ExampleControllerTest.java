@@ -40,12 +40,12 @@ public class ExampleControllerTest {
 
     @Test
     public void shouldReturnFullNameOfAPerson() throws Exception {
-        Person peter = new Person("Peter", "Pan");
+        Person peter = new Person("Peter", "Pan","47.472614","19.059616");
         given(personRepository.findByLastName("Pan")).willReturn(Optional.of(peter));
 
         String greeting = subject.hello("Pan");
 
-        assertThat(greeting, is("Hello Peter Pan!"));
+        assertThat(greeting, is("Hello Peter Pan! Now I see you at 19.059616, 47.472614."));
     }
 
     @Test

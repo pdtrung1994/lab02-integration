@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -33,8 +35,24 @@ public class ExampleController {
         Optional<Person> foundPerson = personRepository.findByLastName(lastName);
 
         return foundPerson
-                .map(person -> String.format("Hello %s %s!", person.getFirstName(), person.getLastName()))
+                .map(person -> String.format("Hello %s %s! Now I see you at %s, %s.", person.getFirstName(), person.getLastName(), person.getHomeLatitude(), person.getHomeLongitude()))
                 .orElse(String.format("Who is this '%s' you're talking about?", lastName));
+    }
+
+    @GetMapping(value = "/hello/{lastName}/location", produces = "application/json")
+    public Map location(@PathVariable final String lastName) {
+        Optional<Person> foundPerson = personRepository.findByLastName(lastName);
+
+        Map<String, String> response = new HashMap<>();
+
+        if(foundPerson.isPresent()) {
+            Person person = foundPerson.get();
+            response.put("longitude", person.getHomeLongitude());
+            response.put("latitude", person.getHomeLatitude());
+            return response;
+        }
+        response.put("error", String.format("Who is this '%s' you're talking about?", lastName));
+        return response;
     }
 
     @GetMapping("/weather")

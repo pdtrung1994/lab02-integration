@@ -26,7 +26,7 @@ public class PersonRepositoryIntegrationTest {
 
     @Test
     public void shouldSaveAndFetchPerson() throws Exception {
-        Person peter = new Person("Peter", "Pan");
+        Person peter = new Person("Peter", "Pan", "47.472614", "19.059616");
         subject.save(peter);
 
         Optional<Person> maybePeter = subject.findByLastName("Pan");
