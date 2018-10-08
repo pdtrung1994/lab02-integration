@@ -16,8 +16,8 @@ public class PlacesClient {
     private final String placesServiceApiKey;
 
     public PlacesClient(final RestTemplate restTemplate,
-                        @Value("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s,%s&radius=1500&keyword=coffee&key=%s") final String placesServiceUrl,
-                        @Value("${PLACES_API_KEY}") final String placesServiceApiKey) {
+                        @Value("${places.url}") final String placesServiceUrl,
+                        @Value("${places.api_secret}") final String placesServiceApiKey) {
         this.restTemplate = restTemplate;
         this.placesServiceUrl = placesServiceUrl;
         this.placesServiceApiKey = placesServiceApiKey;
