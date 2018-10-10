@@ -2,6 +2,7 @@ package example;
 
 import example.person.Person;
 import example.person.PersonRepository;
+import example.places.PlacesClient;
 import example.weather.WeatherResponse;
 import example.weather.WeatherClient;
 import org.junit.Test;
@@ -31,6 +32,9 @@ public class ExampleControllerAPITest {
 
     @MockBean
     private WeatherClient weatherClient;
+
+    @MockBean
+    private PlacesClient placesClient;
 
     @Test
     public void shouldReturnHelloWorld() throws Exception {

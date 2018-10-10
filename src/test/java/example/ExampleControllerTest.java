@@ -2,8 +2,9 @@ package example;
 
 import example.person.Person;
 import example.person.PersonRepository;
-import example.weather.WeatherResponse;
+import example.places.PlacesClient;
 import example.weather.WeatherClient;
+import example.weather.WeatherResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -26,11 +27,14 @@ public class ExampleControllerTest {
     @Mock
     private WeatherClient weatherClient;
 
+    @Mock
+    private PlacesClient placesClient;
+
 
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        subject = new ExampleController(personRepository, weatherClient);
+        subject = new ExampleController(personRepository, weatherClient, placesClient);
     }
 
     @Test
@@ -40,7 +44,7 @@ public class ExampleControllerTest {
 
     @Test
     public void shouldReturnFullNameOfAPerson() throws Exception {
-        Person peter = new Person("Peter", "Pan","47.472614","19.059616");
+        Person peter = new Person("Peter", "Pan", "47.472614", "19.059616");
         given(personRepository.findByLastName("Pan")).willReturn(Optional.of(peter));
 
         String greeting = subject.hello("Pan");

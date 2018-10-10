@@ -1,6 +1,7 @@
 package example.places;
 
 import example.person.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
@@ -15,6 +16,7 @@ public class PlacesClient {
     private final String placesServiceUrl;
     private final String placesServiceApiKey;
 
+    @Autowired
     public PlacesClient(final RestTemplate restTemplate,
                         @Value("${places.url}") final String placesServiceUrl,
                         @Value("${places.api_secret}") final String placesServiceApiKey) {
@@ -24,10 +26,10 @@ public class PlacesClient {
     }
 
     public Optional<PlacesResponse> fetchPlaces(Person costumer) {
-        String url = String.format(placesServiceUrl, costumer.getHomeLongitude(), costumer.getHomeLatitude(), placesServiceApiKey);
-
+        String url = placesServiceUrl + "/json?location={long},{lat}&radius={radius}&keyword=coffee&key={api-key}";
         try {
-            return Optional.ofNullable(restTemplate.getForObject(url, PlacesResponse.class));
+            return Optional.ofNullable(restTemplate.getForObject(url, PlacesResponse.class, costumer.getHomeLongitude(), costumer.getHomeLatitude(), "1500", placesServiceApiKey));
+
         } catch (RestClientException e) {
             return Optional.empty();
         }

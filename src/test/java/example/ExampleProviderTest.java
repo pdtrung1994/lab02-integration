@@ -8,6 +8,7 @@ import au.com.dius.pact.provider.junit.target.TestTarget;
 import au.com.dius.pact.provider.spring.target.MockMvcTarget;
 import example.person.Person;
 import example.person.PersonRepository;
+import example.places.PlacesClient;
 import example.weather.WeatherClient;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -35,6 +36,9 @@ public class ExampleProviderTest {
     @Mock
     private WeatherClient weatherClient;
 
+    @Mock
+    private PlacesClient placesClient;
+
     private ExampleController exampleController;
 
     @TestTarget
@@ -43,7 +47,7 @@ public class ExampleProviderTest {
     @Before
     public void before() {
         initMocks(this);
-        exampleController = new ExampleController(personRepository, weatherClient);
+        exampleController = new ExampleController(personRepository, weatherClient, placesClient);
         target.setControllers(exampleController);
     }
 
