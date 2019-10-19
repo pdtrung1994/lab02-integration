@@ -11,7 +11,7 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private int id;
     private String firstName;
     private String lastName;
 
@@ -27,7 +27,7 @@ public class Person {
         this.homeLatitude = homeLatitude;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -49,21 +49,16 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        if (id != null ? !id.equals(person.id) : person.id != null) return false;
-        if (firstName != null ? !firstName.equals(person.firstName) : person.firstName != null) return false;
-        if (lastName != null ? lastName.equals(person.lastName) : person.lastName == null) return false;
-        if (homeLongitude != null ? homeLongitude.equals(person.homeLongitude) : person.homeLongitude == null) return false;
-        return homeLatitude != null ? homeLatitude.equals(person.homeLatitude) : person.homeLatitude == null;
+        return id == person.id &&
+                Objects.equals(firstName, person.firstName) &&
+                Objects.equals(lastName, person.lastName) &&
+                Objects.equals(homeLongitude, person.homeLongitude) &&
+                Objects.equals(homeLatitude, person.homeLatitude);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (homeLongitude != null ? homeLongitude.hashCode() : 0);
-        result = 31 * result + (homeLatitude != null ? homeLatitude.hashCode() : 0);
-        return result;
+        return Objects.hash(id, firstName, lastName, homeLongitude, homeLatitude);
     }
 
     @Override
