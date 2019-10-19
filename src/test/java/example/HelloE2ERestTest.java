@@ -47,6 +47,6 @@ public class HelloE2ERestTest {
                 .get(String.format("http://localhost:%s/hello/Pan", port))
                 .then()
                 .statusCode(is(200))
-                .body(containsString("Hello Peter Pan! Now I see you at 19.059616, 47.472614."));
+                .body(containsString("Hello Peter Pan!"));
     }
 }

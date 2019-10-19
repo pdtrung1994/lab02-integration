@@ -2,7 +2,6 @@ package example;
 
 import example.person.Person;
 import example.person.PersonRepository;
-import example.places.PlacesClient;
 import example.weather.WeatherResponse;
 import example.weather.WeatherClient;
 import org.junit.Test;
@@ -33,9 +32,6 @@ public class ExampleControllerAPITest {
     @MockBean
     private WeatherClient weatherClient;
 
-    @MockBean
-    private PlacesClient placesClient;
-
     @Test
     public void shouldReturnHelloWorld() throws Exception {
         mockMvc.perform(get("/hello"))
@@ -49,7 +45,7 @@ public class ExampleControllerAPITest {
         given(personRepository.findByLastName("Pan")).willReturn(Optional.of(peter));
 
         mockMvc.perform(get("/hello/Pan"))
-                .andExpect(content().string("Hello Peter Pan! Now I see you at 19.059616, 47.472614."))
+                .andExpect(content().string("Hello Peter Pan!"))
                 .andExpect(status().is2xxSuccessful());
     }
 

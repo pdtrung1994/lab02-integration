@@ -2,7 +2,6 @@ package example;
 
 import example.person.Person;
 import example.person.PersonRepository;
-import example.places.PlacesClient;
 import example.weather.WeatherClient;
 import example.weather.WeatherResponse;
 import org.junit.Before;
@@ -27,14 +26,10 @@ public class ExampleControllerTest {
     @Mock
     private WeatherClient weatherClient;
 
-    @Mock
-    private PlacesClient placesClient;
-
-
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        subject = new ExampleController(personRepository, weatherClient, placesClient);
+        subject = new ExampleController(personRepository, weatherClient);
     }
 
     @Test
@@ -49,7 +44,7 @@ public class ExampleControllerTest {
 
         String greeting = subject.hello("Pan");
 
-        assertThat(greeting, is("Hello Peter Pan! Now I see you at 19.059616, 47.472614."));
+        assertThat(greeting, is("Hello Peter Pan!"));
     }
 
     @Test
