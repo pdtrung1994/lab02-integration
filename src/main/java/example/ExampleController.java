@@ -38,7 +38,7 @@ public class ExampleController {
     }
 
     @GetMapping(value = "/hello/{lastName}/location", produces = "application/json")
-    public Map location(@PathVariable final String lastName) {
+    public Map<String, String> location(@PathVariable final String lastName) {
         Optional<Person> foundPerson = personRepository.findByLastName(lastName);
 
         Map<String, String> response = new HashMap<>();

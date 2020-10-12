@@ -11,8 +11,8 @@ import java.util.Optional;
 @Component
 public class WeatherClient {
 
-    private static final String LATITUDE = "53.5511";
-    private static final String LONGITUDE = "9.9937";
+    private static final String LATITUDE = "47.4979";
+    private static final String LONGITUDE = "19.0402";
     private final RestTemplate restTemplate;
     private final String weatherServiceUrl;
     private final String weatherServiceApiKey;
@@ -27,7 +27,7 @@ public class WeatherClient {
     }
 
     public Optional<WeatherResponse> fetchWeather() {
-        String url = String.format("%s/%s/%s,%s", weatherServiceUrl, weatherServiceApiKey, LATITUDE, LONGITUDE);
+        String url = String.format("%s/data/2.5/weather?units=metric&lat=%s&lon=%s&appid=%s", weatherServiceUrl, LATITUDE, LONGITUDE, weatherServiceApiKey);
 
         try {
             return Optional.ofNullable(restTemplate.getForObject(url, WeatherResponse.class));
